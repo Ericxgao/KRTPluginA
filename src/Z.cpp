@@ -1,5 +1,7 @@
 #include "plugin.hpp"
+#ifndef METAMODULE
 #include <csignal>
+#endif
 
 float normalised(float x, float (*fn)(float)) {
 	float low = fn(-5.f);
@@ -112,7 +114,9 @@ struct Z : Module {
 
 		iol(false);
 		// Register floating-point exception handler.
-    	signal(SIGFPE, fpx_handler);
+		#ifndef METAMODULE
+			signal(SIGFPE, fpx_handler);
+		#endif
 	}
 
 	void process(const ProcessArgs& args) override {
