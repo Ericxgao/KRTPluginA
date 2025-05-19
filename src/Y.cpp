@@ -372,7 +372,8 @@ struct Y : Module {
 	}
 
 	void setAction(int action) {
-		actionCodes[codeCount++] = action;
+		if (codeCount < PORT_MAX_CHANNELS)
+			actionCodes[codeCount++] = action;
 	}
 
 	bool getAction(int action) {
